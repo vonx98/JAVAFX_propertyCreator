@@ -4,7 +4,10 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,6 +17,8 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class mainScreen_Controller implements Initializable {
@@ -76,7 +82,7 @@ public class mainScreen_Controller implements Initializable {
                 createdTextFieldCount_label.setText("0");
 
                 ArrayList<String> textFieldNames = new ArrayList<>();
-                ArrayList<String> columnNames = new ArrayList<>();
+
 
 
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -212,8 +218,37 @@ public class mainScreen_Controller implements Initializable {
 
     }
 
+    @FXML
+    void excelBtn_onAction() {
+
+        if (file != null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Objects.requireNonNull(this.getClass().getClassLoader().getResource("FXML/createExcelScreen.fxml")));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(scene);
+                stage.setTitle("Create Excel");
+                stage.setMaximized(false);
+                stage.setResizable(false);
+                excelScreen_Controller controller = (excelScreen_Controller) loader.getController();
+                controller.file = file;
+                stage.showAndWait();
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
     File file = null;
 
+    ArrayList<String> columnNames = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

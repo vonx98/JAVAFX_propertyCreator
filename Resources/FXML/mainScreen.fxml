@@ -28,7 +28,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="531.0">
                      <children>
-                        <TextField fx:id="fileRoad_textField" prefHeight="25.0" prefWidth="939.0">
+                        <TextField fx:id="fileRoad_textField" prefHeight="25.0" prefWidth="809.0">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
@@ -36,6 +36,11 @@
                         <Button mnemonicParsing="false" onAction="#selectFileBtn_onAction" prefHeight="25.0" prefWidth="71.0" text="Select File">
                            <HBox.margin>
                               <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#excelBtn_onAction" prefHeight="25.0" prefWidth="122.0" text="Create Excel">
+                           <HBox.margin>
+                              <Insets left="15.0" />
                            </HBox.margin>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#startBtn_onAction" prefHeight="25.0" prefWidth="111.0" text="Start">
